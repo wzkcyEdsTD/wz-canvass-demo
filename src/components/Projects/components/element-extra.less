@@ -1,0 +1,120 @@
+.my-tabs /deep/ .el-tabs__active-bar {
+    height          : 4px;
+    background-color: #409eff;
+}
+
+.my-tabs /deep/ .el-tabs__item {
+    font-size     : 18px;
+    text-align    : center;
+    cursor        : pointer;
+    /* font-weight: 700; */
+    padding       : 0 10px !important;
+    color         : #e0e0e0;
+}
+
+.my-tabs /deep/ .is-active {
+    font-weight: 700;
+    color      : #409eff;
+}
+
+.my-tabs /deep/ .el-tabs__nav-wrap::after {
+    height: 1px;
+}
+
+.my-menu /deep/ .my-checkbox {
+    margin-right: 8px;
+    top         : -1px;
+}
+
+.my-menu /deep/ .my-checkbox .el-checkbox__inner {
+    width : 20px;
+    height: 20px;
+}
+
+.my-menu /deep/ .my-checkbox .el-checkbox__inner::after {
+    width       : 5px;
+    height      : 11px;
+    border-width: 2px;
+    left        : 6px;
+}
+
+.my-menu /deep/ .el-checkbox__input.is-checked .el-checkbox__inner,
+.my-menu /deep/ .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: #1e3663;
+    border-color    : #1e3663;
+}
+
+.list-content>.my-menu {
+    /* top: 80px; */
+}
+
+.my-menu,
+.my-menu /deep/ .el-menu {
+    background: transparent;
+    border    : none;
+}
+
+.my-menu /deep/ .el-submenu {
+    position     : relative;
+    margin-bottom: 16px;
+}
+
+.my-menu /deep/ .noCheck {
+    margin-bottom: 6px;
+}
+
+.my-menu /deep/ .inner-title {
+    position   : absolute;
+    font-size  : 16px;
+    line-height: 40px;
+    top        : -14px;
+    left       : 85px;
+}
+
+.my-menu /deep/ .red_title {
+    color     : red !important;
+    font-size : 16px !important;
+    font-style: normal;
+}
+
+.my-menu /deep/ .yellow_title {
+    color     : yellow !important;
+    font-size : 16px !important;
+    font-style: normal;
+}
+
+.my-menu /deep/ .noCheck .el-submenu__title {
+    // background: unset;
+}
+
+.my-menu /deep/ .noCheck .el-submenu__title .el-submenu__icon-arrow {
+    // display: none;
+}
+
+.my-menu /deep/ .el-menu-item.is-active {
+    background-color: rgba(19, 88, 183, 1);
+}
+
+.my-menu /deep/ .el-submenu__title {
+    padding    : 0 14px !important;
+    font-size  : 18px;
+    color      : #fff !important;
+    font-weight: 500;
+    height     : 46px;
+    line-height: 42px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    background : rgba(62, 158, 255, 0.66);
+}
+
+.my-menu /deep/ .el-submenu__title:hover {
+    background: rgba(62, 158, 255, 0.66);
+}
+
+.my-menu /deep/ .el-submenu__title i {
+    color    : #fff;
+    font-size: 17px;
+}
+
+.my-menu /deep/ .el-submenu .children-menu-item:last-child {
+    border-bottom: none;
+}

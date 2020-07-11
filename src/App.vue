@@ -1,32 +1,25 @@
+<!--
+ * @Author: eds
+ * @Date: 2020-07-09 14:10:03
+ * @LastEditTime: 2020-07-10 10:18:34
+ * @LastEditors: eds
+ * @Description: 
+ * @FilePath: \wz-canvass-demo\src\App.vue
+--> 
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="app">
+    <header class="app_header">
+      <div class="app_toptab_position app_toptab_normal"></div>
+    </header>
+    <div class="app_container">
+      <router-view ref="router" />
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import url("assets/less/common.less");
+@import url("assets/less/arcgis.less");
+@import url("assets/less/animate.css");
 </style>
+

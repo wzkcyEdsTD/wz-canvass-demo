@@ -1,27 +1,28 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+/*
+ * @Author: eds
+ * @Date: 2020-07-10 08:59:11
+ * @LastEditTime: 2020-07-10 09:21:46
+ * @LastEditors: eds
+ * @Description: 
+ * @FilePath: \wz-canvass-demo\src\router\index.ts
+ */ 
+import Vue from "vue";
+import VueRouter, { RouteConfig } from "vue-router";
+import Home from "@/views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes: Array<RouteConfig> = [
+const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  mode: "hash",
+  routes,
+});
 
-export default router
+export default router;
