@@ -1,7 +1,7 @@
 <!--
  * @Author: eds
  * @Date: 2020-07-10 10:02:51
- * @LastEditTime: 2020-07-10 15:30:11
+ * @LastEditTime: 2020-07-13 18:10:26
  * @LastEditors: eds
  * @Description: 
  * @FilePath: \wz-canvass-demo\src\components\Projects\components\List\List.vue
@@ -14,16 +14,15 @@
       </el-input>
       <el-button type="primary" @click.stop="query">查询</el-button>
     </div>
-    <el-tabs v-model="tabActive" class="my-tabs">
+    <el-tabs v-model="tabActive" class="my-tabs" @tab-click="tabsPaneClickHandler">
       <el-tab-pane label="区域" name="area" />
-      <el-tab-pane label="产业" name="industry" />
+      <el-tab-pane label="产业" name="kind" />
       <el-tab-pane label="用地规模" name="scale" />
     </el-tabs>
     <div class="list-content">
       <el-menu active-text-color="#000" text-color="#000" class="my-menu">
         <el-submenu
           v-for="(value, index) of tabsMenuData"
-          v-show="value.tab == tabActive"
           :class="[!value.id ? 'noCheck' : '']"
           :key="index"
           :index="index + ''"
@@ -37,7 +36,7 @@
               @change="changeCheckboxHandler(index)"
             ></el-checkbox>-->
             <span class="inner-title" v-if="!value.children.length" v-html="value.innerTitle" />
-            <span>{{ value.areaName }}</span>
+            <span>{{ value.titleName }}</span>
             <span>（{{ value.children.length }}个）</span>
           </template>
           <el-menu-item
@@ -64,14 +63,16 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import menuData from "@/mock/areaList";
+import { areaList, kindList, scaleList } from "@/mock/areaList";
+console.log(areaList, kindList, scaleList);
 export default {
   name: "list",
   data() {
     return {
       tabActive: "area",
       queryValue: undefined,
-      tabsMenuData: menuData,
+      forceMenuData: areaList,
+      tabsMenuData: areaList,
       hideVisible: false
     };
   },
@@ -84,7 +85,15 @@ export default {
     hideSide() {
       this.hideVisible = !this.hideVisible;
     },
-    // tabsPaneClickHandler(val) {},
+    tabsPaneClickHandler({ name }) {
+      const hash = {
+        area: areaList,
+        kind: kindList,
+        scale: scaleList
+      };
+      this.tabsMenuData = hash[name];
+      this.forceMenuData = hash[name];
+    },
     changeCheckboxHandler(parentIndex, childrenIndex) {
       const currentMenu = this.tabsMenuData;
       const parentCheck = currentMenu[parentIndex].check;
@@ -103,7 +112,7 @@ export default {
     query() {
       const tabsMenuData = [];
       const reg = new RegExp(this.queryValue);
-      menuData.forEach(d => {
+      this.forceMenuData.forEach(d => {
         const children = d.children.filter(item => item.name.match(reg));
         tabsMenuData.push({
           ...d,
