@@ -1,7 +1,7 @@
 <!--
  * @Author: eds
  * @Date: 2020-07-10 10:29:34
- * @LastEditTime: 2020-07-10 16:27:39
+ * @LastEditTime: 2020-07-15 14:29:14
  * @LastEditors: eds
  * @Description: 
  * @FilePath: \wz-canvass-demo\src\components\Projects\components\Details\Details.vue
@@ -18,7 +18,7 @@
       </el-tabs>
       <ProjectDetail :project="project" />
     </div>
-    <span class="hide_button" @click="()=>{hideVisible=!hideVisible}"></span>
+    <span class="hide_button" @click="switchPanel"></span>
   </div>
 </template>
 
@@ -43,6 +43,10 @@ export default {
         this.project = val;
         this.hideVisible = false;
       });
+    },
+    switchPanel() {
+      this.$hub.$emit("switch-panel", this.hideVisible);
+      this.hideVisible = !this.hideVisible;
     }
   }
 };

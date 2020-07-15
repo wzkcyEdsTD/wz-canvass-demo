@@ -1,12 +1,39 @@
 /*
  * @Author: eds
  * @Date: 2020-07-10 09:24:39
- * @LastEditTime: 2020-07-11 16:16:40
+ * @LastEditTime: 2020-07-15 14:45:50
  * @LastEditors: eds
  * @Description:
  * @FilePath: \wz-canvass-demo\src\components\Projects\Arcgis\ArcgisScene.ts
  */
-import { POINT, ROAD, PROJECT_POLYGON } from "@/config";
+import { POINT, PROJECTS, ROAD, CAMERA, PROJECT_POLYGON } from "@/config";
+const pointOption: object = {
+  elevationInfo: {
+    mode: "relative-to-scene",
+    featureExpressionInfo: {
+      expression: 14,
+    },
+    unit: "meters",
+  },
+  outFields: ["*"],
+  featureReduction: { type: "selection" },
+  labelingInfo: [
+    {
+      labelExpressionInfo: { value: "{名称}" },
+      symbol: {
+        type: "label-3d",
+        symbolLayers: [
+          {
+            type: "text",
+            material: { color: "white" },
+            halo: { size: 1, color: [50, 50, 50] },
+            size: 10,
+          },
+        ],
+      },
+    },
+  ],
+};
 /**
  * 项目地图初始化
  * @param {JSX.ElementClass} context
@@ -14,17 +41,21 @@ import { POINT, ROAD, PROJECT_POLYGON } from "@/config";
  */
 function doMassMap(context: JSX.ElementClass): Promise<boolean> {
   return new Promise(resolve => {
-    const { $ARCGIS_API, map } = context as any;
-    const { MapImageLayer, FeatureLayer } = $ARCGIS_API;
+    const { $ARCGIS_API, map, view } = context as any;
+    const { FeatureLayer } = $ARCGIS_API;
+
     map.add(
       new FeatureLayer({
-        id: "ROAD",
-        url: ROAD,
+        id: "PROJECTS",
+        url: PROJECTS,
         elevationInfo: {
           mode: "relative-to-scene",
         },
+        definitionExpression: "类型1 = '项目点'",
+        ...pointOption,
       })
     );
+    view.goTo(CAMERA);
     resolve(true);
   });
 }
@@ -49,38 +80,40 @@ function forceToArea(map: any, FeatureLayer: any) {
         },
       })
     );
-  !map.findLayerById("POINT") &&
-    map.add(
-      new FeatureLayer({
-        id: "POINT",
-        url: POINT,
-        elevationInfo: {
-          mode: "relative-to-scene",
-          featureExpressionInfo: {
-            expression: 14,
+  !map.findLayerById("ROAD")
+    ? map.add(
+        new FeatureLayer({
+          id: "ROAD",
+          url: ROAD,
+          elevationInfo: {
+            mode: "relative-to-scene",
           },
-          unit: "meters",
-        },
-        outFields: ["*"],
-        featureReduction: { type: "selection" },
-        labelingInfo: [
-          {
-            labelExpressionInfo: { value: "{名称}" },
-            symbol: {
-              type: "label-3d",
-              symbolLayers: [
-                {
-                  type: "text",
-                  material: { color: "white" },
-                  halo: { size: 1, color: [50, 50, 50] },
-                  size: 10,
-                },
-              ],
-            },
-          },
-        ],
-      })
-    );
+        })
+      )
+    : (map.findLayerById("ROAD").visible = true);
+  !map.findLayerById("POINT")
+    ? map.add(
+        new FeatureLayer({
+          id: "POINT",
+          url: POINT,
+          definitionExpression: "类型1 <> '项目点'",
+          ...pointOption,
+        })
+      )
+    : (map.findLayerById("POINT").visible = true);
+}
+
+/**
+ *
+ * 返回首页
+ * @param {JSX.ElementClass} context
+ */
+function cameraBackMap(context: JSX.ElementClass) {
+  const { map, view } = context as any;
+  map.findLayerById("POINT") && (map.findLayerById("POINT").visible = false);
+  map.findLayerById("ROAD") && (map.findLayerById("ROAD").visible = false);
+
+  view.goTo(CAMERA);
 }
 
 /**
@@ -93,11 +126,11 @@ function cameraToMap(context: JSX.ElementClass, [x, y]: number[]) {
   const { $ARCGIS_API, view, map } = context as any;
   const { FeatureLayer } = $ARCGIS_API;
   view.goTo({
-    position: { x, y: y - 0.008, z: 400 },
+    position: { x, y: y - 0.006, z: 400 },
     heading: 0,
-    tilt: 70,
+    tilt: 60,
   });
   forceToArea(map, FeatureLayer);
 }
 
-export { doMassMap, cameraToMap };
+export { doMassMap, cameraToMap, cameraBackMap };

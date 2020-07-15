@@ -1,7 +1,7 @@
 <!--
  * @Author: eds
  * @Date: 2020-07-10 10:02:51
- * @LastEditTime: 2020-07-13 18:10:26
+ * @LastEditTime: 2020-07-15 14:32:34
  * @LastEditors: eds
  * @Description: 
  * @FilePath: \wz-canvass-demo\src\components\Projects\components\List\List.vue
@@ -106,7 +106,7 @@ export default {
     },
     // 单独点击一个侧目录的子项
     menuItemClickHandler(project) {
-      this.$hub.$emit("menu-item-click", project);
+      project.projectId && this.$hub.$emit("menu-item-click", project);
     },
     // 查询
     query() {

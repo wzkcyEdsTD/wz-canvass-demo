@@ -1,7 +1,7 @@
 /*
  * @Author: eds
  * @Date: 2020-07-10 08:59:11
- * @LastEditTime: 2020-07-10 10:03:53
+ * @LastEditTime: 2020-07-14 09:13:50
  * @LastEditors: eds
  * @Description:
  * @FilePath: \wz-canvass-demo\src\main.ts
@@ -16,7 +16,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
-Vue.prototype.$hub = new Vue(); //  全局事件线程
+Vue.prototype.$hub = new Vue();
 Vue.prototype.$window = window;
 Vue.prototype.$jq = (Window as any).$;
 

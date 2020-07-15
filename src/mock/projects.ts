@@ -36,6 +36,43 @@ const projects: ProjectInterface = [
     area: "鹿城区",
     kind: "城市开发项目",
     scale: "1-50亩",
+    name: "鹿城科技创新大厦项目",
+  },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
+    name: "鹿城数字经济产业园项目",
+  },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
+    name: "鹿城营楼片区康养中心项目",
+  },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
+    name: "鹿城藤桥下岸工业片区",
+  },
+  { area: "鹿城区", kind: "城市开发项目", scale: "1-50亩", name: "鞋都四期" },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
+    name: "鹿城鞋都总部经济园提升项目",
+  },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
+    name: "鹿城营楼D-06、D-07、D-08地块项目",
+  },
+  {
+    area: "鹿城区",
+    kind: "城市开发项目",
+    scale: "1-50亩",
     name: "鹿城工业园区（中央涂单元）改造提升项目",
     projectId: "A02",
     location:

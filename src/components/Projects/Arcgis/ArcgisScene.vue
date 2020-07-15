@@ -1,7 +1,7 @@
 <!--
  * @Author: eds
  * @Date: 2020-07-10 09:23:47
- * @LastEditTime: 2020-07-11 16:38:12
+ * @LastEditTime: 2020-07-15 14:29:38
  * @LastEditors: eds
  * @Description: 
  * @FilePath: \wz-canvass-demo\src\components\Projects\Arcgis\ArcgisScene.vue
@@ -13,11 +13,11 @@
 <script lang="ts">
 import { Component, Mixins, Watch } from "vue-property-decorator";
 import ArcgisSceneCore from "@/components/Core/ArcgisSceneCore.vue";
-import { doMassMap, cameraToMap } from "./ArcgisScene";
+import { doMassMap, cameraToMap, cameraBackMap } from "./ArcgisScene";
 import { State } from "vuex-class";
 
 @Component({
-  methods: { doMassMap, cameraToMap }
+  methods: { doMassMap, cameraToMap, cameraBackMap }
 })
 export default class ArcgisScene extends Mixins(ArcgisSceneCore) {
   protected id: number = +new Date();
@@ -38,6 +38,9 @@ export default class ArcgisScene extends Mixins(ArcgisSceneCore) {
     const { $hub } = this as any;
     $hub.$on("menu-item-click", ({ geometry }: any) => {
       cameraToMap(this, geometry || []);
+    });
+    $hub.$on("switch-panel", (val: boolean) => {
+      !val && cameraBackMap(this);
     });
   }
 }
