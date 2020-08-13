@@ -1,7 +1,7 @@
 /*
  * @Author: eds
  * @Date: 2020-07-10 09:03:19
- * @LastEditTime: 2020-07-15 14:17:26
+ * @LastEditTime: 2020-08-13 16:09:31
  * @LastEditors: eds
  * @Description:
  * @FilePath: \wz-canvass-demo\src\config\index.ts
@@ -11,7 +11,7 @@ const CONFIG_DEV = {
   ARCGIS_API_URL:
     "https://lysb.lucheng.gov.cn/lc/libs/arcgis_js_v412_api/arcgis_js_api/library/4.12/dojo/dojo.js",
   LOCAL_HOST: "https://jichuditu.wzkcy.com/arcgis",
-  SERVER_HOST: "https://jichuditu.wzkcy.com/server/rest/services",
+  SERVER_HOST: "http://172.20.83.212/server/rest/services",
 };
 //  坐标系
 const spatialReference = { wkid: 4490 };
